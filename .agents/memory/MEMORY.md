@@ -1,0 +1,3 @@
+- [Model architecture](model-architecture.md) — 3 model types; GraphModel uses _Tensor duck-type (_is_graph_tensor) so Layer.__call__ can detect graph mode without circular imports.
+- [Optimizer patterns](optimizer-patterns.md) — Lookahead must set self._inner BEFORE calling super().__init__() because base constructor triggers the learning_rate property setter.
+- [Dense 3D backward](dense-backward.md) — Dense.backward reshapes input to (-1, last_dim) to support both 2D (batch, features) and 3D (batch, seq, features) inputs from TransformerBlock.

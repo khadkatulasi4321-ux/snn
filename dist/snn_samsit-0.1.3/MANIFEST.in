@@ -1,0 +1,35 @@
+# ─────────────────────────────
+# Documentation (sdist only)
+# ─────────────────────────────
+include docs/docs/*/*/*
+recursive-include docs/docs *.md *.html *.py *.in
+recursive-include docs/docs/api *.md 
+recursive-include docs/docs/guide/ *.md 
+recursive-include docs/docs/tutorials/ *.md 
+recursive-include docs/docs/_static/ *.css 
+
+recursive-include docs *.md *.html *.py *.in
+recursive-include docs/api *.md 
+recursive-include docs/guide/ *.md 
+recursive-include docs/tutorials/ *.md 
+recursive-include docs/_static/ *.css 
+
+
+# ─────────────────────────────
+# Examples
+# ─────────────────────────────
+recursive-include examples *.py *.md *.ipynb
+
+# ─────────────────────────────
+# Project metadata
+# ─────────────────────────────
+include README.md
+include LICENSE
+include pyproject.toml
+
+# ─────────────────────────────
+# Cleanup
+# ─────────────────────────────
+global-exclude *.pyc *.pyo __pycache__/*
+recursive-exclude docs/docs/_build *
+recursive-exclude .git *

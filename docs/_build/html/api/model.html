@@ -1,0 +1,964 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="snn.layers" href="layers.html"><link rel="prev" title="API Reference" href="index.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>snn.model - snn</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=aba6ce98" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2563eb;
+  --color-brand-content: #1d4ed8;
+  --color-admonition-background: #eff6ff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #60a5fa;
+  --color-brand-content: #93c5fd;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">snn</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">snn</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input aria-label="Toggle navigation of Tutorials" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/01_first_network.html">Tutorial 1 — Your First Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/02_classification.html">Tutorial 2 — Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/03_regression.html">Tutorial 3 — Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/04_activations.html">Tutorial 4 — Choosing Activation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/05_sequences.html">Tutorial 5 — Sequences with LSTM and GRU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/06_trainer.html">Tutorial 6 — Advanced Training with Trainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/07_language.html">Tutorial 7 — Language Models (Transformer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/08_model_types.html">Tutorial 8 — Beyond Sequential: Model &amp; GraphModel</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guide/index.html">User Guide</a><input aria-label="Toggle navigation of User Guide" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/layers.html">Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/activations.html">Activation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/training.html">Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/utilities.html">Utilities</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">snn.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html">snn.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activations.html">snn.activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="losses.html">snn.losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html">snn.optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html">snn.initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">snn.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">snn.trainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">snn.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/api/model.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="snn-model">
+<h1>snn.model<a class="headerlink" href="#snn-model" title="Link to this heading">¶</a></h1>
+<p>snn ships three model types with identical <code class="docutils literal notranslate"><span class="pre">compile</span> <span class="pre">→</span> <span class="pre">fit</span> <span class="pre">→</span> <span class="pre">evaluate</span> <span class="pre">→</span> <span class="pre">predict</span></code>
+APIs.  Choose the one that fits your architecture:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">Sequential</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">Model</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">GraphModel</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linear pipeline</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>Skip connections</p></td>
+<td><p>✅ via <code class="docutils literal notranslate"><span class="pre">Residual</span></code></p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>Multiple inputs/outputs</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>Auto backward</p></td>
+<td><p>✅</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="sequential">
+<h2>Sequential<a class="headerlink" href="#sequential" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snn.model.Sequential">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">snn.model.</span></span><span class="sig-name descname"><span class="pre">Sequential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Sequential model — a linear stack of layers.</p>
+<p>Build, compile, then train:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.add" title="Link to this definition">¶</a></dt>
+<dd><p>Append a layer to the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer</strong> (<a class="reference internal" href="layers.html#snn.layers.base.Layer" title="snn.layers.base.Layer"><em>Layer</em></a>) – Any <a class="reference internal" href="layers.html#snn.layers.base.Layer" title="snn.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">snn.layers.base.Layer</span></code></a> subclass.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Allows chaining: <code class="docutils literal notranslate"><span class="pre">model.add(Dense(64)).add(Dense(10))</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_logits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.compile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.compile" title="Link to this definition">¶</a></dt>
+<dd><p>Configure the model for training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimizer</strong> (<em>str</em><em>, </em><a class="reference internal" href="optimizers.html#snn.optimizers.base.Optimizer" title="snn.optimizers.base.Optimizer"><em>Optimizer</em></a><em>, or </em><em>dict</em>) – <p>Weight-update rule. Three forms accepted:</p>
+<ul>
+<li><p><strong>String shorthand</strong> — <code class="docutils literal notranslate"><span class="pre">&quot;adam&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sgd&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;adamw&quot;</span></code>, …</p></li>
+<li><p><strong>Instance</strong> — <code class="docutils literal notranslate"><span class="pre">Adam(learning_rate=3e-4)</span></code></p></li>
+<li><p><strong>Config dict</strong> — <code class="docutils literal notranslate"><span class="pre">{&quot;name&quot;:</span> <span class="pre">&quot;adam&quot;,</span> <span class="pre">&quot;learning_rate&quot;:</span> <span class="pre">1e-3}</span></code>
+Any key recognised by the optimizer constructor can appear in
+the dict; the <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code> (or <code class="docutils literal notranslate"><span class="pre">&quot;class&quot;</span></code>) key selects the
+optimizer class.</p></li>
+</ul>
+</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><a class="reference internal" href="losses.html#snn.losses.Loss" title="snn.losses.Loss"><em>Loss</em></a><em>, or </em><em>dict</em>) – <p>Objective function. Three forms accepted:</p>
+<ul>
+<li><p><strong>String shorthand</strong> — <code class="docutils literal notranslate"><span class="pre">&quot;mse&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;categorical_crossentropy&quot;</span></code>, …</p></li>
+<li><p><strong>Instance</strong> — <code class="docutils literal notranslate"><span class="pre">HuberLoss(delta=2.0)</span></code></p></li>
+<li><p><strong>Config dict</strong> — <code class="docutils literal notranslate"><span class="pre">{&quot;name&quot;:</span> <span class="pre">&quot;huber&quot;,</span> <span class="pre">&quot;delta&quot;:</span> <span class="pre">2.0}</span></code></p></li>
+</ul>
+</p></li>
+<li><p><strong>metrics</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – Metric(s) tracked per epoch. Accepts a single string or a list
+of strings / callables.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em><em>, </em><em>optional</em>) – Shortcut to override the optimizer’s learning rate without
+constructing an instance manually. Applied after the optimizer is
+built from <code class="docutils literal notranslate"><span class="pre">optimizer</span></code>.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em><em>, </em><em>optional</em>) – Shortcut to set <code class="docutils literal notranslate"><span class="pre">weight_decay</span></code> on the optimizer (if supported).</p></li>
+<li><p><strong>clip_norm</strong> (<em>float</em><em>, </em><em>optional</em>) – Clip the global gradient L2 norm to this value before each
+optimizer step.  Equivalent to using
+<code class="docutils literal notranslate"><span class="pre">Trainer(model,</span> <span class="pre">clip_grad_norm=clip_norm)</span></code> but available
+directly on the model.</p></li>
+<li><p><strong>from_logits</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the loss receives raw (unnormalised) scores. Passed
+automatically to <code class="docutils literal notranslate"><span class="pre">BinaryCrossentropy</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CategoricalCrossentropy</span></code> when constructed from a string or dict.
+Has no effect when you pass a <code class="docutils literal notranslate"><span class="pre">Loss</span></code> instance directly.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, prints a compile-summary table showing the chosen
+optimizer, loss, metrics, and any extra settings.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Minimal:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Learning-rate shortcut (no need to import Adam):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dict config — all hyperparameters in one place:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">optimizer</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;adamw&quot;</span><span class="p">,</span> <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">1e-3</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="n">loss</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;huber&quot;</span><span class="p">,</span> <span class="s2">&quot;delta&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With gradient clipping (no Trainer needed):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">clip_norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Logit input to loss (last Dense has no activation):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">from_logits</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.get_compile_config">
+<span class="sig-name descname"><span class="pre">get_compile_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.get_compile_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.get_compile_config" title="Link to this definition">¶</a></dt>
+<dd><p>Return a plain-dict snapshot of the current compile settings.</p>
+<p>Useful for logging, serialising experiments, or re-compiling a new
+model with the same settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Keys: <code class="docutils literal notranslate"><span class="pre">&quot;optimizer&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;loss&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;metrics&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;learning_rate&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;weight_decay&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;clip_norm&quot;</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Train the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>) – Input data of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>y</strong> (<em>ndarray</em>) – Target data of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">...)</span></code>.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Number of full passes over the dataset.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Number of samples per gradient update.</p></li>
+<li><p><strong>validation_data</strong> (<em>tuple</em><em>, </em><em>optional</em>) – <code class="docutils literal notranslate"><span class="pre">(X_val,</span> <span class="pre">y_val)</span></code> evaluated at the end of each epoch.</p></li>
+<li><p><strong>shuffle</strong> (<em>bool</em>) – Whether to shuffle the training data each epoch.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – <code class="docutils literal notranslate"><span class="pre">0</span></code> = silent, <code class="docutils literal notranslate"><span class="pre">1</span></code> = one line per epoch.</p></li>
+<li><p><strong>callbacks</strong> (<em>list</em><em>, </em><em>optional</em>) – Callables invoked at the end of each epoch as
+<code class="docutils literal notranslate"><span class="pre">callback(epoch,</span> <span class="pre">history)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Training history. Keys are <code class="docutils literal notranslate"><span class="pre">&quot;loss&quot;</span></code>, each metric name, and
+<code class="docutils literal notranslate"><span class="pre">&quot;val_*&quot;</span></code> equivalents when <code class="docutils literal notranslate"><span class="pre">validation_data</span></code> is provided.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.predict" title="Link to this definition">¶</a></dt>
+<dd><p>Run inference on <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – If given, runs inference in mini-batches (saves memory for large
+datasets).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predictions of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">output_units)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.evaluate" title="Link to this definition">¶</a></dt>
+<dd><p>Compute loss and metrics on <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>y</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">{&quot;loss&quot;:</span> <span class="pre">float,</span> <span class="pre">metric_name:</span> <span class="pre">float,</span> <span class="pre">…}</span></code></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.summary" title="Link to this definition">¶</a></dt>
+<dd><p>Print a table of layers, output shapes, and parameter counts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.get_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of per-layer weight dicts (copies).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.set_weights">
+<span class="sig-name descname"><span class="pre">set_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.set_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.set_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Restore weights from the format returned by <a class="reference internal" href="#snn.model.Sequential.get_weights" title="snn.model.Sequential.get_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_weights()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.save_weights">
+<span class="sig-name descname"><span class="pre">save_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.save_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.save_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Save all trainable weights to a NumPy <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Filename prefix (the <code class="docutils literal notranslate"><span class="pre">.npz</span></code> extension is added automatically).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Sequential.load_weights">
+<span class="sig-name descname"><span class="pre">load_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Sequential.load_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Sequential.load_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Load weights from a <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file written by <a class="reference internal" href="#snn.model.Sequential.save_weights" title="snn.model.Sequential.save_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_weights()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to the <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file (with or without extension).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="model-subclassable">
+<h2>Model (subclassable)<a class="headerlink" href="#model-subclassable" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snn.model.Model">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">snn.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><a class="reference internal" href="../_modules/snn/model.html#Model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Subclassable model class — define <code class="docutils literal notranslate"><span class="pre">call()</span></code> and <code class="docutils literal notranslate"><span class="pre">backward()</span></code> yourself.</p>
+<p>All <a class="reference internal" href="layers.html#snn.layers.base.Layer" title="snn.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></a> instances assigned as attributes
+(or stored in lists/tuples of attributes) are auto-discovered for
+parameter collection and optimizer updates.  The compile / fit /
+predict / evaluate API is identical to <a class="reference internal" href="#snn.model.Sequential" title="snn.model.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<p><strong>Basic usage</strong> (functionally identical to Sequential):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyNet</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn</span>   <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span>  <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyNet</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Residual block</strong> (skip connections):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ResBlock</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>                 <span class="c1"># no activation here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proj</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>                <span class="c1"># shortcut projection</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">shortcut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pre_act</span> <span class="o">=</span> <span class="n">h</span> <span class="o">+</span> <span class="n">shortcut</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pre_act</span><span class="p">)</span>     <span class="c1"># ReLU after residual</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pre_act</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>          <span class="c1"># ReLU gate</span>
+        <span class="n">d_proj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span> <span class="o">+</span> <span class="n">d_proj</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.call" title="Link to this definition">¶</a></dt>
+<dd><p>Forward pass.  Override in subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.backward" title="Link to this definition">¶</a></dt>
+<dd><p>Backward pass.  Override in subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_logits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.compile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.compile" title="Link to this definition">¶</a></dt>
+<dd><p>Configure the model — identical interface to <a class="reference internal" href="#snn.model.Sequential" title="snn.model.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimizer</strong> (<em>str</em><em>, </em><a class="reference internal" href="optimizers.html#snn.optimizers.base.Optimizer" title="snn.optimizers.base.Optimizer"><em>Optimizer</em></a><em>, or </em><em>dict</em>)</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><a class="reference internal" href="losses.html#snn.losses.Loss" title="snn.losses.Loss"><em>Loss</em></a><em>, or </em><em>dict</em>)</p></li>
+<li><p><strong>metrics</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>clip_norm</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>from_logits</strong> (<em>bool</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Train the model.  Identical interface to <a class="reference internal" href="#snn.model.Sequential.fit" title="snn.model.Sequential.fit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential.fit</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.predict" title="Link to this definition">¶</a></dt>
+<dd><p>Run inference on <code class="docutils literal notranslate"><span class="pre">x</span></code>.  Returns predictions as a NumPy array.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.evaluate" title="Link to this definition">¶</a></dt>
+<dd><p>Compute loss and metrics on <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.summary" title="Link to this definition">¶</a></dt>
+<dd><p>Print all discovered Layer types and parameter counts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.save_weights">
+<span class="sig-name descname"><span class="pre">save_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.save_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.save_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Save all trainable weights to a <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.load_weights">
+<span class="sig-name descname"><span class="pre">load_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.load_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.load_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Load weights from a <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file written by <a class="reference internal" href="#snn.model.Model.save_weights" title="snn.model.Model.save_weights"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_weights()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.Model.get_compile_config">
+<span class="sig-name descname"><span class="pre">get_compile_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Model.get_compile_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Model.get_compile_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="graphmodel-functional-api">
+<h2>GraphModel (functional API)<a class="headerlink" href="#graphmodel-functional-api" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snn.model.GraphModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">snn.model.</span></span><span class="sig-name descname"><span class="pre">GraphModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Functional-API model: build arbitrary computation graphs with skip
+connections, multi-input layers, and shared weights.</p>
+<p>Build a graph by connecting layers to <a class="reference internal" href="#snn.model.Input" title="snn.model.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a> nodes, then pass
+the terminal node(s) to <code class="docutils literal notranslate"><span class="pre">GraphModel</span></code>.  The model traces the DAG,
+sorts it topologically, and handles forward / backward automatically.</p>
+<p class="rubric">Examples</p>
+<p><strong>Simple feedforward</strong> (equivalent to Sequential):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">snn.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">GraphModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">snn.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dense</span>
+
+<span class="n">x</span>   <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,))</span>
+<span class="n">h</span>   <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">h</span>   <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GraphModel</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Residual / skip connection</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>      <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,))</span>
+<span class="n">skip</span>   <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>                        <span class="c1"># shortcut</span>
+<span class="n">h</span>      <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">h</span>      <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">)(</span><span class="n">h</span><span class="p">)</span>                        <span class="c1"># same size as skip</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()([</span><span class="n">h</span><span class="p">,</span> <span class="n">skip</span><span class="p">])</span>                    <span class="c1"># element-wise add</span>
+<span class="n">out</span>    <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">merged</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GraphModel</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Multi-branch</strong> (text + metadata fusion):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text_in</span>  <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,))</span>              <span class="c1"># e.g. mean-pooled GloVe</span>
+<span class="n">meta_in</span>  <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,))</span>               <span class="c1"># numerical features</span>
+
+<span class="n">h_text</span>   <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">text_in</span><span class="p">)</span>
+<span class="n">h_meta</span>   <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">meta_in</span><span class="p">)</span>
+<span class="n">merged</span>   <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()([</span><span class="n">h_text</span><span class="p">,</span> <span class="n">h_meta</span><span class="p">])</span>  <span class="c1"># (batch, 160)</span>
+<span class="n">out</span>      <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">merged</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GraphModel</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">text_in</span><span class="p">,</span> <span class="n">meta_in</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">X_text</span><span class="p">,</span> <span class="n">X_meta</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<a class="reference internal" href="#snn.model.Input" title="snn.model.Input"><em>Input</em></a><em> or </em><em>list</em><em> of </em><a class="reference internal" href="#snn.model.Input" title="snn.model.Input"><em>Input</em></a>) – Entry-point node(s).</p></li>
+<li><p><strong>outputs</strong> (<em>_Tensor</em><em> or </em><em>list</em><em> of </em><em>_Tensor</em>) – Terminal node(s) whose values are returned by <code class="docutils literal notranslate"><span class="pre">predict</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_logits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.compile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.compile" title="Link to this definition">¶</a></dt>
+<dd><p>Configure the model.  Identical interface to <a class="reference internal" href="#snn.model.Sequential" title="snn.model.Sequential"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimizer</strong> (<em>str</em><em>, </em><a class="reference internal" href="optimizers.html#snn.optimizers.base.Optimizer" title="snn.optimizers.base.Optimizer"><em>Optimizer</em></a><em>, or </em><em>dict</em>)</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><a class="reference internal" href="losses.html#snn.losses.Loss" title="snn.losses.Loss"><em>Loss</em></a><em>, or </em><em>dict</em>)</p></li>
+<li><p><strong>metrics</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>clip_norm</strong> (<em>float</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>from_logits</strong> (<em>bool</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Train the model.  Identical interface to <a class="reference internal" href="#snn.model.Sequential.fit" title="snn.model.Sequential.fit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequential.fit</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.predict" title="Link to this definition">¶</a></dt>
+<dd><p>Run inference on <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.evaluate" title="Link to this definition">¶</a></dt>
+<dd><p>Compute loss and metrics on <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.summary" title="Link to this definition">¶</a></dt>
+<dd><p>Print all graph nodes and parameter counts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.save_weights">
+<span class="sig-name descname"><span class="pre">save_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.save_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.save_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Save all weights to a <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snn.model.GraphModel.load_weights">
+<span class="sig-name descname"><span class="pre">load_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#GraphModel.load_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.GraphModel.load_weights" title="Link to this definition">¶</a></dt>
+<dd><p>Load weights from a <code class="docutils literal notranslate"><span class="pre">.npz</span></code> file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="input">
+<h2>Input<a class="headerlink" href="#input" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snn.model.Input">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">snn.model.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/snn/model.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snn.model.Input" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Tensor</span></code></p>
+<p>Entry-point node for the <a class="reference internal" href="#snn.model.GraphModel" title="snn.model.GraphModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphModel</span></code></a> functional API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> (<em>tuple</em>) – Shape of a <em>single sample</em> (without the batch dimension).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">h</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">GraphModel</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="layers.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">snn.layers</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">API Reference</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, samsit-phew
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">snn.model</a><ul>
+<li><a class="reference internal" href="#sequential">Sequential</a><ul>
+<li><a class="reference internal" href="#snn.model.Sequential"><code class="docutils literal notranslate"><span class="pre">Sequential</span></code></a><ul>
+<li><a class="reference internal" href="#snn.model.Sequential.add"><code class="docutils literal notranslate"><span class="pre">Sequential.add()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.compile"><code class="docutils literal notranslate"><span class="pre">Sequential.compile()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.get_compile_config"><code class="docutils literal notranslate"><span class="pre">Sequential.get_compile_config()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.fit"><code class="docutils literal notranslate"><span class="pre">Sequential.fit()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.predict"><code class="docutils literal notranslate"><span class="pre">Sequential.predict()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.evaluate"><code class="docutils literal notranslate"><span class="pre">Sequential.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.summary"><code class="docutils literal notranslate"><span class="pre">Sequential.summary()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.get_weights"><code class="docutils literal notranslate"><span class="pre">Sequential.get_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.set_weights"><code class="docutils literal notranslate"><span class="pre">Sequential.set_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.save_weights"><code class="docutils literal notranslate"><span class="pre">Sequential.save_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Sequential.load_weights"><code class="docutils literal notranslate"><span class="pre">Sequential.load_weights()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-subclassable">Model (subclassable)</a><ul>
+<li><a class="reference internal" href="#snn.model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a><ul>
+<li><a class="reference internal" href="#snn.model.Model.call"><code class="docutils literal notranslate"><span class="pre">Model.call()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.backward"><code class="docutils literal notranslate"><span class="pre">Model.backward()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.compile"><code class="docutils literal notranslate"><span class="pre">Model.compile()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.fit"><code class="docutils literal notranslate"><span class="pre">Model.fit()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.predict"><code class="docutils literal notranslate"><span class="pre">Model.predict()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.evaluate"><code class="docutils literal notranslate"><span class="pre">Model.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.summary"><code class="docutils literal notranslate"><span class="pre">Model.summary()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.save_weights"><code class="docutils literal notranslate"><span class="pre">Model.save_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.load_weights"><code class="docutils literal notranslate"><span class="pre">Model.load_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.Model.get_compile_config"><code class="docutils literal notranslate"><span class="pre">Model.get_compile_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#graphmodel-functional-api">GraphModel (functional API)</a><ul>
+<li><a class="reference internal" href="#snn.model.GraphModel"><code class="docutils literal notranslate"><span class="pre">GraphModel</span></code></a><ul>
+<li><a class="reference internal" href="#snn.model.GraphModel.compile"><code class="docutils literal notranslate"><span class="pre">GraphModel.compile()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.fit"><code class="docutils literal notranslate"><span class="pre">GraphModel.fit()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.predict"><code class="docutils literal notranslate"><span class="pre">GraphModel.predict()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.evaluate"><code class="docutils literal notranslate"><span class="pre">GraphModel.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.summary"><code class="docutils literal notranslate"><span class="pre">GraphModel.summary()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.save_weights"><code class="docutils literal notranslate"><span class="pre">GraphModel.save_weights()</span></code></a></li>
+<li><a class="reference internal" href="#snn.model.GraphModel.load_weights"><code class="docutils literal notranslate"><span class="pre">GraphModel.load_weights()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input">Input</a><ul>
+<li><a class="reference internal" href="#snn.model.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

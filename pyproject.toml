@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snn-numpy"
+version = "0.1.1"
+description = "Simple Neural Network — a pure-NumPy deep learning library with a Keras-like API"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "samsit-phew" }]
+keywords = ["deep-learning", "neural-networks", "machine-learning", "numpy", "from-scratch", "education"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Education",
+]
+
+dependencies = [
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=7.0",
+    "furo>=2023.1",
+    "myst-parser>=2.0",
+    "sphinx-autodoc-typehints>=1.23",
+]
+dev = [
+    "pytest>=7",
+    "pytest-cov>=4.0",
+    "matplotlib",
+    "scipy>=1.10",
+]
+all = [
+    "sphinx>=7.0",
+    "furo>=2023.1",
+    "myst-parser>=2.0",
+    "sphinx-autodoc-typehints>=1.23",
+    "pytest>=7",
+    "matplotlib",
+]
+
+[project.scripts]
+snn-docs = "snn.docs.serve_docs:main"
+
+[project.urls]
+Documentation = "https://github.com/samsit-phew/snn"
+Source = "https://github.com/samsit-phew/snn"
+"Bug Tracker" = "https://github.com/samsit-phew/snn/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["snn*"]
+
+[tool.setuptools.package-data]
+"snn" = [
+    "docs/source/**/*",
+]

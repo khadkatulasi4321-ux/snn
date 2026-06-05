@@ -1,0 +1,2 @@
+[console_scripts]
+snn-docs = snn.docs.serve_docs:main

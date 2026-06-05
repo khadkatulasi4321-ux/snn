@@ -1,0 +1,25 @@
+# MANIFEST.in — controls which extra files are included in the sdist (source distribution).
+# These files are NOT installed as Python packages but ARE included in the tarball
+# so that users who build from source have everything they need.
+
+# Documentation source (Sphinx)
+recursive-include docs *.md *.rst *.py *.png *.jpg *.svg *.css *.js *.html *.txt
+include docs/conf.py
+include docs/_static/*
+
+# Examples
+recursive-include examples *.py *.md *.ipynb
+
+# Project metadata
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.py
+include MANIFEST.in
+
+# Exclude compiled / build artefacts
+exclude *.pyc
+exclude *.pyo
+recursive-exclude * __pycache__
+recursive-exclude docs/_build *
+recursive-exclude .git *

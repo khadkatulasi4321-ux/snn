@@ -1,0 +1,46 @@
+/* ── snn docs — custom styles ── */
+
+/* Wider content area */
+.wy-nav-content {
+    max-width: 960px;
+}
+
+/* Code blocks */
+div.highlight pre {
+    font-size: 0.87em;
+    line-height: 1.55;
+}
+
+/* API section headings */
+dl.class > dt,
+dl.function > dt,
+dl.method > dt {
+    background: var(--color-background-secondary, #f8faff);
+    border-left: 3px solid var(--color-brand-primary, #2563eb);
+    padding: 6px 10px;
+    border-radius: 0 4px 4px 0;
+    font-family: var(--font-stack--monospace);
+}
+
+/* Parameter tables */
+table.docutils {
+    width: 100%;
+    font-size: 0.9em;
+}
+
+table.docutils th {
+    background: var(--color-background-secondary, #eff6ff);
+}
+
+/* Note / warning admonitions */
+.admonition.note {
+    border-left-color: var(--color-brand-primary, #2563eb);
+}
+
+/* Inline code */
+code.literal {
+    font-size: 0.88em;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: var(--color-background-secondary, #f1f5f9);
+}
